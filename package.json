@@ -1,0 +1,16 @@
+{
+  "name": "bookjack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tanguy Cavagna <tanguy.cvgn@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn workspace @bookjack/client run build",
+    "start": "yarn workspace @bookjack/server run start",
+    "dev": "yarn workspace @bookjack/server run dev"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
