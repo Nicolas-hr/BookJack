@@ -1,0 +1,30 @@
+{
+    // Telemetry shit
+    "telemetry.enableTelemetry": false,
+  
+    // Global
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.cursorBlinking": "phase",
+    "editor.cursorSmoothCaretAnimation": true,
+  
+    // Prettier
+    "prettier.tabWidth": 2,
+    "prettier.singleQuote": false,
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.quickSuggestions": {
+        "strings": true
+      },
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+  
+    // Minimap
+    "editor.minimap.renderCharacters": false
+  }
+  
