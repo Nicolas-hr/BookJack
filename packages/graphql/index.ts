@@ -1,6 +1,11 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import { merge } from "lodash";
 
+import {
+  typeDefs as userSchema,
+  resolvers as userResolvers,
+} from "./schema/User";
+
 const typeDefs = gql`
   type Query {
     _empty: String
@@ -14,8 +19,8 @@ const typeDefs = gql`
 const resolvers = {};
 
 const server = new ApolloServer({
-  typeDefs: [typeDefs],
-  resolvers: merge(resolvers),
+  typeDefs: [typeDefs, userSchema],
+  resolvers: merge(resolvers, userResolvers),
 });
 
 export default server;
