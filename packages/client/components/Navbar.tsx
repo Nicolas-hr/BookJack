@@ -2,10 +2,8 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
-import MenuIcon from "@material-ui/icons/Menu";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core";
 import { useAuth } from "react-use-auth";
 
@@ -39,10 +37,16 @@ export default function Navbar() {
             />
           </Link>
 
-          <div className={classes.inline}>
-            <Button onClick={() => login()}>Login</Button>
-            <Button onClick={() => signup()}>Singin</Button>
-          </div>
+          {isAuthenticated() ? (
+            <div className={classes.inline}>
+              <Button onClick={() => logout()}>Logout</Button>
+            </div>
+          ) : (
+            <div className={classes.inline}>
+              <Button onClick={() => login()}>Login</Button>
+              <Button onClick={() => signup()}>Singin</Button>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </div>
