@@ -1,4 +1,5 @@
 import React from "react";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { AuthConfig } from "react-use-auth";
 import { Auth0 } from "react-use-auth/auth0";
 import { useRouter } from "next/router";
@@ -6,6 +7,12 @@ import { useRouter } from "next/router";
 import "../styles/globals.css";
 import theme from "../theme";
 import { ThemeProvider } from "@material-ui/core/styles";
+
+// Apollo client to make graphql call programmaticaly
+const apolloClient = new ApolloClient({
+  uri: "/graphql",
+  cache: new InMemoryCache(),
+});
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -29,7 +36,9 @@ export default function MyApp({ Component, pageProps }) {
         }}
       />
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <ApolloProvider client={apolloClient}>
+          <Component {...pageProps} />
+        </ApolloProvider>
       </ThemeProvider>
     </React.Fragment>
   );
