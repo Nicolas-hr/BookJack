@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { AuthConfig } from "react-use-auth";
 import { Auth0 } from "react-use-auth/auth0";
@@ -15,15 +15,21 @@ const apolloClient = new ApolloClient({
 });
 
 export default function MyApp({ Component, pageProps }) {
+  const [hasMounted, setHasMounted] = useState(false);
   const router = useRouter();
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // Handle server/client side mismatch
+    setHasMounted(true);
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  // Show nothing if not mounted
+  if (!hasMounted) return null;
 
   return (
     <React.Fragment>
