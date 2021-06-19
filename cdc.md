@@ -35,8 +35,7 @@ Lorsque l'utilisateur n'est pas connecté il peut voir la page d'accueil.
 
 #### Notation d'un livre
 
-- Un utilisateur connecté peut noter un livre
-  - si celui le note alors qu'il ne l'a pas lu, il est ajouté dans sa liste des livres lus.
+- Notation sur 5.
 - Lorsque l'on note un livre on peut aussi mettre un commentaire à celui-ci.
 
 #### Fil d'actualités
