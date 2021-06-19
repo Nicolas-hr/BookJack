@@ -22,14 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar() {
-  const [hydrated, setHydrated] = useState(false);
   const classes = useStyles();
   const { isAuthenticated, user, login, signup, logout } = useAuth();
-
-  // Prevent server/client mismatch
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
 
   return (
     <div>
@@ -43,7 +37,7 @@ export default function Navbar() {
             />
           </Link>
 
-          {isAuthenticated() && hydrated ? (
+          {isAuthenticated() ? (
             <div className={classes.inline}>
               <Typography variant="body1">{user.email}</Typography>
               <Button onClick={() => logout()}>Logout</Button>
