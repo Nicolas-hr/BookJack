@@ -9,5 +9,5 @@ datasource db {
 
 model users {
   userId       String  @id
-  userUsername String?
+  userUsername String? @unique
 }

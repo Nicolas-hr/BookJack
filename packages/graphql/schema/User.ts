@@ -6,17 +6,17 @@ const prisma = new PrismaClient();
 export const typeDefs = gql`
   type User {
     userId: String!
-    userFirstName: String
-    userLastName: String
+    userUsername: String
   }
 
   extend type Query {
     allUsers: [User!]!
-    searchUser(id: String!): User
+    searchUserById(id: String!): User
+    searchUserByUsername(username: String!): User
   }
 
   extend type Mutation {
-    addUser(id: String!): User
+    addUser(id: String!, username: String!): User
   }
 `;
 
@@ -31,14 +31,27 @@ export const resolvers = {
     },
 
     /**
-     * Find and return the user
+     * Find and return the user by id
      * @param param1 Object destructuring to get the `id` from the `args` argument
      * @returns Found user or null
      */
-    searchUser: (parent, { id }, ctx, info) => {
+    searchUserById: (parent, { id }, ctx, info) => {
       return prisma.users.findUnique({
         where: {
           userId: id,
+        },
+      });
+    },
+
+    /**
+     * Find and return the user by username
+     * @param param1 Object destructuring to get the `id` from the `args` argument
+     * @returns Found user or null
+     */
+    searchUserByUsername: (parent, { username }, ctx, info) => {
+      return prisma.users.findUnique({
+        where: {
+          userUsername: username,
         },
       });
     },
@@ -49,12 +62,13 @@ export const resolvers = {
      * @param param1 Object destructuring to get the `id, email, name, and address` from the `args` argument
      * @returns The created user
      */
-    addUser: (parent, { id }, ctx, info) => {
+    addUser: (parent, { id, username }, ctx, info) => {
       return prisma.users.upsert({
         where: { userId: id },
         update: {},
         create: {
           userId: id,
+          userUsername: username,
         },
       });
     },
