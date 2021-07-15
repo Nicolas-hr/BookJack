@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 export const typeDefs = gql`
   type User {
     userId: String!
-    userEmail: String!
     userFirstName: String
     userLastName: String
   }

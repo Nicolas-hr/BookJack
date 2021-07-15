@@ -11,11 +11,28 @@ const theme = createMuiTheme({
     },
   },
 
-  palette: {
-    primary: {
-      main: "#fff",
-    },
+  typography: {
+    fontFamily: ['"Montserrat"', "Open Sans"].join(","),
   },
 });
+
+export const sizes = {
+  navbar: {
+    height: "150px",
+    paddingLeft: "38px",
+    paddingRight: "38px",
+  },
+  drawer: {
+    padding: "3px 38px",
+  },
+};
+
+export const palette = {
+  white: "#FFFFFF",
+  blue: "#9BAAF2",
+  darkBlue: "#1A223B",
+  textLight: "#C6D0EB",
+  textDark: "#1A223B",
+};
 
 export default theme;
