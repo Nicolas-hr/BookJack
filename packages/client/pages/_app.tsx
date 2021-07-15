@@ -5,7 +5,7 @@ import { Auth0 } from "react-use-auth/auth0";
 import { useRouter } from "next/router";
 
 import "../styles/globals.css";
-import theme from "../theme";
+import theme, { sizes } from "../theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 
 // Apollo client to make graphql call programmaticaly

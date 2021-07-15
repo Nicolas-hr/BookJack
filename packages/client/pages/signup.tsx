@@ -1,14 +1,15 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { useAuth } from "react-use-auth";
+import { useUser } from "../custom-hooks/useUser";
 
 const Home = () => {
-  const { isAuthenticated, user, login, signup, logout } = useAuth();
+  const { user } = useAuth();
+  const { createUser } = useUser();
 
   return (
     <div>
       <Navbar />
-      Hey !
     </div>
   );
 };

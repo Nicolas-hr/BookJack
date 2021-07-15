@@ -22,7 +22,7 @@ const UserStatusCheck = () => {
     if (exists) {
       window.location.replace("/");
     } else {
-      createUser(user.sub);
+      window.location.replace("/signup");
     }
   }, [exists]);
 
