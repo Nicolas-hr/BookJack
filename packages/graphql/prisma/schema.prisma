@@ -8,7 +8,6 @@ datasource db {
 }
 
 model users {
-  userId        String  @id
-  userFirstName String?
-  userLastName  String?
+  userId       String  @id
+  userUsername String?
 }
