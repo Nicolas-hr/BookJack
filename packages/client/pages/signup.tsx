@@ -3,7 +3,6 @@ import { useAuth } from "react-use-auth";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
 import Navbar from "../components/Navbar";
 import { useUser } from "../custom-hooks/useUser";
