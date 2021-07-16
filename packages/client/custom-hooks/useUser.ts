@@ -1,9 +1,4 @@
-import {
-  gql,
-  useQuery,
-  useMutation,
-  ApolloQueryResult,
-} from "@apollo/react-hooks";
+import { gql, useQuery, useMutation } from "@apollo/react-hooks";
 import { useCallback, useState } from "react";
 
 /**
@@ -44,7 +39,6 @@ export const useUser = () => {
    */
   const [isLoading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
-  const [exists, setUserExists] = useState(false);
 
   /**
    * GraphQL
@@ -102,22 +96,26 @@ export const useUser = () => {
       setLoading(true);
       const { id, username } = keys;
 
-      // Does user exists
-      console.log(exists);
+      userExists(keys).then(async (exists) => {
+        if (!exists) {
+          // Create user in db
+          const created = await _createUser({
+            variables: {
+              id,
+              username,
+            },
+          });
 
-      // Create user in db
-      const created = await _createUser({
-        variables: {
-          id,
-          username,
-        },
+          setUser(created?.data ?? null);
+        } else {
+          setUser(null);
+        }
       });
 
-      setUser(created?.data ?? null);
       setLoading(false);
     },
     [userExists]
   );
 
-  return { isLoading, exists, user, userExists, createUser };
+  return { isLoading, user, userExists, createUser };
 };

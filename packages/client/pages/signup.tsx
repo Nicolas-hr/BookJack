@@ -196,7 +196,7 @@ const Signup = () => {
         id: user.sub,
         username: fields["username"].value,
       });
-      // window.location.replace("/");
+      window.location.replace("/");
     }
 
     return true;

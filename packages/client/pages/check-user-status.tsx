@@ -8,7 +8,7 @@ import { useUser } from "../custom-hooks/useUser";
  */
 const UserStatusCheck = () => {
   const { user } = useAuth();
-  const { exists, userExists } = useUser();
+  const { userExists } = useUser();
 
   // Check if user exists in our db after fetching auth0's user
   useEffect(() => {
