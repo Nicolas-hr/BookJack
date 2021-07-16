@@ -17,6 +17,10 @@ const theme = createMuiTheme({
 });
 
 export const sizes = {
+  root: {
+    padding: "0 38px",
+    paddingBottom: "80px",
+  },
   navbar: {
     height: "150px",
     paddingLeft: "38px",
@@ -30,6 +34,7 @@ export const sizes = {
   },
   button: {
     borderRadius: "30px",
+    boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.15)",
   },
   input: {
     borderRadius: "14px",

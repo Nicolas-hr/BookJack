@@ -3,31 +3,15 @@ import { useAuth } from "react-use-auth";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/styles";
 import Navbar from "../components/Navbar";
 import { useUser } from "../custom-hooks/useUser";
 import { sizes, palette } from "../theme";
 import { IFieldList, IFieldListError } from "../interfaces/Field";
+import Hero from "../components/Hero";
+import PrimaryButton from "../components/PrimaryButton";
 
 const useStyles = makeStyles((theme) => ({
-  hero: {
-    width: "100%",
-    position: "relative",
-    padding: sizes.app.padding,
-    paddingTop: "20px",
-    paddingBottom: "80px",
-    backgroundColor: palette.darkBlue,
-    fontSize: "48px",
-    fontWeight: 700,
-    color: "#fff",
-
-    "& img": {
-      position: "absolute",
-      top: "100%",
-      left: 0,
-    },
-  },
   accent: {
     color: palette.blue,
   },
@@ -48,15 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     width: "100%",
-    borderRadius: sizes.button.borderRadius,
-    backgroundColor: palette.blue,
-    textTransform: "none",
-    fontWeight: 600,
-    fontSize: "20px",
-
-    "&:focus": {
-      backgroundColor: palette.blue,
-    },
   },
 }));
 
@@ -206,12 +181,11 @@ const Signup = () => {
     <div>
       <Navbar />
 
-      <div className={classes.hero}>
+      <Hero waves={true}>
         Finish
         <br />
         <span className={classes.accent}>Account</span>
-        <img src={"/wave.svg"} />
-      </div>
+      </Hero>
 
       <div className={classes.inputs}>
         <TextField
@@ -238,10 +212,8 @@ const Signup = () => {
           }}
         ></TextField>
 
-        <Button
-          variant="contained"
-          size="large"
-          color="primary"
+        <PrimaryButton
+          title="Sign up"
           className={classes.submit}
           onClick={() => {
             fieldsError = {};
@@ -260,9 +232,7 @@ const Signup = () => {
                 .catch((e) => console.log(e));
             } catch (error) {}
           }}
-        >
-          Sign up
-        </Button>
+        />
       </div>
     </div>
   );
