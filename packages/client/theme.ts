@@ -25,6 +25,15 @@ export const sizes = {
   drawer: {
     padding: "3px 38px",
   },
+  app: {
+    padding: "3px 38px",
+  },
+  button: {
+    borderRadius: "30px",
+  },
+  input: {
+    borderRadius: "14px",
+  },
 };
 
 export const palette = {

@@ -8,23 +8,20 @@ import { useUser } from "../custom-hooks/useUser";
  */
 const UserStatusCheck = () => {
   const { user } = useAuth();
-  const { exists, userExists, createUser } = useUser();
+  const { exists, userExists } = useUser();
 
   // Check if user exists in our db after fetching auth0's user
   useEffect(() => {
     if (user) {
-      userExists(user.sub);
+      userExists({ id: user.sub }).then((result) => {
+        if (result) {
+          window.location.replace("/");
+        } else {
+          window.location.replace("/signup");
+        }
+      });
     }
   }, [user]);
-
-  // Handle user existance
-  useEffect(() => {
-    if (exists) {
-      window.location.replace("/");
-    } else {
-      window.location.replace("/signup");
-    }
-  }, [exists]);
 
   return (
     <React.Fragment>
