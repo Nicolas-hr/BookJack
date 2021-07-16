@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/styles";
 import Navbar from "../components/Navbar";
 import { useUser } from "../custom-hooks/useUser";
 import { sizes, palette } from "../theme";
-import { useEffect } from "react";
+import { IFieldList, IFieldListError } from "../interfaces/Field";
 
 const useStyles = makeStyles((theme) => ({
   hero: {
@@ -60,33 +60,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface IField {
-  required: boolean;
-  value: string;
-  default?: string | number | boolean;
-}
-
-interface IFieldList {
-  [fieldname: string]: IField;
-}
-
-interface IFieldError {
-  reason: string;
-}
-
-interface IFieldListError {
-  [fieldname: string]: IFieldError;
-}
-
 const Signup = () => {
   const { isAuthenticated, user } = useAuth();
 
+  // Edge case handling
   if (!isAuthenticated()) {
     window.location.replace("/");
   }
 
   const classes = useStyles();
   const { createUser, userExists } = useUser();
+  // List of all present fields in the page.
+  // !!! DO NOT FORGET TO ADD NEW FIELDS IN THIS LIST !!!
   const [fields, setFields] = useState<IFieldList>({
     username: {
       required: true,
@@ -135,6 +120,7 @@ const Signup = () => {
     const errorHappend = Object.keys(fieldsError).length !== 0;
     setFieldsErrorsState(fieldsError);
 
+    // Throw error to break the `then()` chain before the creation of the new user
     if (errorHappend) {
       throw new Error("Error happend during test suite");
     }
@@ -143,7 +129,8 @@ const Signup = () => {
   };
 
   /**
-   * Submit new user
+   * Begin the test suite
+   *
    * @returns All fields
    */
   const submitUser = async (): Promise<IFieldList> => {
@@ -152,6 +139,7 @@ const Signup = () => {
 
   /**
    * Make all the required checks
+   *
    * @param fields Field list
    */
   const performRequireChecks = async (): Promise<boolean> => {
@@ -166,6 +154,7 @@ const Signup = () => {
 
   /**
    * Make regex checks on username
+   *
    * @param fields Field list given by the previous promise
    * @returns
    */
@@ -175,6 +164,39 @@ const Signup = () => {
         "username",
         "The username can only contains a-z, A-Z, 0-9, _, or -"
       );
+    }
+
+    return true;
+  };
+
+  /**
+   * Chek if the user exists
+   *
+   * @returns
+   */
+  const performUserExistsCheck = async (): Promise<boolean> => {
+    const exists = await userExists({ username: fields["username"].value });
+
+    if (exists) {
+      storeFieldsError("username", "This username is already taken.");
+    }
+
+    return true;
+  };
+
+  /**
+   * Commit changes
+   *
+   * @param greenLight Do we have green light to commit
+   * @returns
+   */
+  const commitUserCreation = async (errors: boolean): Promise<boolean> => {
+    if (!errors) {
+      createUser({
+        id: user.sub,
+        username: fields["username"].value,
+      });
+      // window.location.replace("/");
     }
 
     return true;
@@ -229,25 +251,12 @@ const Signup = () => {
               submitUser()
                 .then(() => performRequireChecks())
                 .then(() => performUsernameRegex())
-                .then(() => userExists({ username: fields["username"].value }))
-                .then((exists) => {
-                  if (exists) {
-                    storeFieldsError(
-                      "username",
-                      "This username is already taken."
-                    );
-                  }
-                })
+                .then(() => performUserExistsCheck())
+                // Update state variable to show errors to user
                 .then(() => applyFieldsErrorState())
-                .then((errorHappend) => {
-                  if (!errorHappend) {
-                    createUser({
-                      id: user.sub,
-                      username: fields["username"].value,
-                    });
-                    window.location.replace("/");
-                  }
-                })
+                // If the chain asn't broke with an Error threw before
+                .then((err) => commitUserCreation(err))
+                // If the chain as broke
                 .catch((e) => console.log(e));
             } catch (error) {}
           }}
