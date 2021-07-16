@@ -3,7 +3,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Drawer from "@material-ui/core/Drawer";
 import { HamburgerSqueeze } from "react-animated-burgers";
 import { makeStyles } from "@material-ui/core";
@@ -62,12 +61,15 @@ const Navbar: React.FC = () => {
   const classes = useStyles();
   const { isAuthenticated, user, login, signup, logout } = useAuth();
   const [open, setOpen] = useState(false);
-  const { exists, userExists } = useUser();
+  const { userExists } = useUser();
+  const [exists, setUserExists] = useState<boolean>();
 
   // Check if user exists in our db
   useEffect(() => {
     if (user) {
-      userExists(user.sub);
+      userExists({ id: user.sub }).then((exists) => {
+        setUserExists(exists);
+      });
     }
   }, [user]);
 

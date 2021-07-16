@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { AuthConfig } from "react-use-auth";
 import { Auth0 } from "react-use-auth/auth0";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import "../styles/globals.css";
 import theme, { sizes } from "../theme";
@@ -33,6 +34,12 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <React.Fragment>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+      </Head>
       <AuthConfig
         authProvider={Auth0}
         navigate={(url: string) => router.push(url)}

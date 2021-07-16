@@ -5,16 +5,25 @@ import { useCallback, useState } from "react";
  * GraphQL queries
  */
 const CREATE_USER = gql`
-  mutation ($id: String!) {
-    addUser(id: $id) {
+  mutation ($id: String!, $username: String!) {
+    addUser(id: $id, username: $username) {
+      userId
+      userUsername
+    }
+  }
+`;
+
+const SEARCH_USER_BY_ID = gql`
+  query ($id: String!) {
+    searchUserById(id: $id) {
       userId
     }
   }
 `;
 
-const SEARCH_USER = gql`
-  query ($id: String!) {
-    searchUser(id: $id) {
+const SEARCH_USER_BY_USERNAME = gql`
+  query ($username: String!) {
+    searchUserByUsername(username: $username) {
       userId
     }
   }
@@ -30,14 +39,18 @@ export const useUser = () => {
    */
   const [isLoading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
-  const [exists, setUserExists] = useState(false);
 
   /**
    * GraphQL
    */
-  const { refetch: searchUser } = useQuery(SEARCH_USER, {
+  const { refetch: searchUserById } = useQuery(SEARCH_USER_BY_ID, {
     variables: {
       id: "",
+    },
+  });
+  const { refetch: searchUserByUsername } = useQuery(SEARCH_USER_BY_USERNAME, {
+    variables: {
+      username: "",
     },
   });
   const [_createUser, { data: createdUser }] = useMutation(CREATE_USER);
@@ -46,50 +59,63 @@ export const useUser = () => {
    * Does a use exists
    * @param {string} id Id of the checked user
    */
-  const userExists = useCallback(async (id: string = null) => {
-    setLoading(true);
+  const userExists = useCallback(
+    async (keys: { id?: string; username?: string }): Promise<boolean> => {
+      const id = keys?.id;
+      const username = keys?.username;
 
-    // Edges case handling
-    if (id === null) {
-      setUserExists(false);
-      setUser(null);
-      setLoading(false);
-      return;
-    }
+      // Edges case handling
+      if (id === null && username === null) {
+        Promise.reject("No key provided");
+      }
 
-    // Search user in db
-    const _foundUser = await searchUser({
-      id,
-    });
+      // Search user in db
+      if (id) {
+        const _foundUser = await searchUserById({
+          id,
+        });
 
-    setUserExists(_foundUser?.data?.searchUser ? true : false);
-    setUser(_foundUser?.data?.searchUser ?? null);
-    setLoading(false);
-  }, []);
+        return _foundUser?.data?.searchUserById ? true : false;
+      } else if (username) {
+        const _foundUser = await searchUserByUsername({
+          username,
+        });
+
+        return _foundUser?.data?.searchUserByUsername ? true : false;
+      }
+    },
+    []
+  );
 
   /**
    * Create a new user in the database
    * @param {string} id Id of the new user
    */
-  const createUser = useCallback(async (id: string = null) => {
-    setLoading(true);
+  const createUser = useCallback(
+    async (keys: { id: string; username: string }) => {
+      setLoading(true);
+      const { id, username } = keys;
 
-    // Edge case handling
-    if (id === null) {
-      setUser(null);
+      userExists(keys).then(async (exists) => {
+        if (!exists) {
+          // Create user in db
+          const created = await _createUser({
+            variables: {
+              id,
+              username,
+            },
+          });
+
+          setUser(created?.data ?? null);
+        } else {
+          setUser(null);
+        }
+      });
+
       setLoading(false);
-    }
+    },
+    [userExists]
+  );
 
-    // Create user in db
-    const created = await _createUser({
-      variables: {
-        id,
-      },
-    });
-
-    setUser(created?.data ?? null);
-    setLoading(false);
-  }, []);
-
-  return { isLoading, exists, user, userExists, createUser };
+  return { isLoading, user, userExists, createUser };
 };
