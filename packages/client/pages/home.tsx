@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useAuth } from "react-use-auth";
 import { makeStyles } from "@material-ui/core";
 import Navbar from "../components/Navbar";
-import { sizes, palette } from "../theme";
 import Footer from "../components/Footer";
+import { asLoggedRequired } from "../custom-hooks/useProtect";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -26,4 +26,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default asLoggedRequired(Home);

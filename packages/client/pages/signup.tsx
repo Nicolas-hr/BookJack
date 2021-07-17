@@ -11,6 +11,7 @@ import { IFieldList, IFieldListError } from "../interfaces/Field";
 import Hero from "../components/Hero";
 import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
+import { asLoggedRequired } from "../custom-hooks/useProtect";
 
 const useStyles = makeStyles((theme) => ({
   accent: {
@@ -241,4 +242,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default asLoggedRequired(Signup);
