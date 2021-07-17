@@ -9,7 +9,7 @@ import Hero from "../components/Hero";
 import Feature from "../components/Feature";
 import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
-import { asLambdaRequired } from "../hoc/useProtect";
+import { asLambdaRequired } from "../hoc/RouteProtection";
 
 const useStyles = makeStyles((theme) => ({
   accent: {
