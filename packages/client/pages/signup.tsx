@@ -11,7 +11,7 @@ import { IFieldList, IFieldListError } from "../interfaces/Field";
 import Hero from "../components/Hero";
 import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
-import { asLoggedRequired } from "../custom-hooks/useProtect";
+import { asLoggedRequired } from "../hoc/useProtect";
 
 const useStyles = makeStyles((theme) => ({
   accent: {

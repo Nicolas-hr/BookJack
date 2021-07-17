@@ -3,7 +3,7 @@ import { useAuth } from "react-use-auth";
 import { makeStyles } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { asLoggedRequired } from "../custom-hooks/useProtect";
+import { asLoggedRequired } from "../hoc/useProtect";
 
 const useStyles = makeStyles((theme) => ({}));
 
