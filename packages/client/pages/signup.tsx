@@ -10,6 +10,7 @@ import { sizes, palette } from "../theme";
 import { IFieldList, IFieldListError } from "../interfaces/Field";
 import Hero from "../components/Hero";
 import PrimaryButton from "../components/PrimaryButton";
+import Footer from "../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   accent: {
@@ -178,7 +179,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <Navbar />
 
       <Hero waves={true}>
@@ -234,7 +235,9 @@ const Signup = () => {
           }}
         />
       </div>
-    </div>
+
+      <Footer />
+    </React.Fragment>
   );
 };
 

@@ -8,6 +8,7 @@ import { sizes, palette } from "../theme";
 import Hero from "../components/Hero";
 import Feature from "../components/Feature";
 import PrimaryButton from "../components/PrimaryButton";
+import Footer from "../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   accent: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
   body: {
     padding: sizes.root.padding,
     paddingTop: "70px",
+    paddingBottom: "70px",
   },
   sectionTitle: {
     position: "relative",
@@ -87,7 +89,7 @@ const Home = () => {
   }, [user]);
 
   return (
-    <div>
+    <React.Fragment>
       <Navbar />
 
       <Hero>
@@ -160,7 +162,9 @@ const Home = () => {
           </Feature>
         </div>
       </main>
-    </div>
+
+      <Footer />
+    </React.Fragment>
   );
 };
 

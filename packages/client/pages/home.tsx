@@ -3,6 +3,7 @@ import { useAuth } from "react-use-auth";
 import { makeStyles } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import { sizes, palette } from "../theme";
+import Footer from "../components/Footer";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -17,10 +18,11 @@ const Home = () => {
   }, [user]);
 
   return (
-    <div>
+    <React.Fragment>
       <Navbar />
       Home
-    </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 
