@@ -9,6 +9,7 @@ import Hero from "../components/Hero";
 import Feature from "../components/Feature";
 import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
+import { asLambdaRequired } from "../hoc/RouteProtection";
 
 const useStyles = makeStyles((theme) => ({
   accent: {
@@ -69,24 +70,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const LandingPage = () => {
   const classes = useStyles();
-  const { isAuthenticated, user, logout } = useAuth();
-  const { userExists } = useUser();
-
-  // Edge case handling if a `logout` hasn't work and the user as been redirected
-  // at the home page without having completed the sign up process.
-  useEffect(() => {
-    if (isAuthenticated()) {
-      userExists({ id: user.sub }).then((exists) => {
-        if (!exists) {
-          logout();
-        } else {
-          window.location.replace("/home");
-        }
-      });
-    }
-  }, [user]);
 
   return (
     <React.Fragment>
@@ -168,4 +153,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default asLambdaRequired(LandingPage);

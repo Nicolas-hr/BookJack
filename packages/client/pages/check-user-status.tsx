@@ -15,7 +15,7 @@ const UserStatusCheck = () => {
     if (user) {
       userExists({ id: user.sub }).then((result) => {
         if (result) {
-          window.location.replace("/");
+          window.location.replace("/home");
         } else {
           window.location.replace("/signup");
         }
