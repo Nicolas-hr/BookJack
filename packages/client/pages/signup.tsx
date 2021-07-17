@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/styles";
 import Navbar from "../components/Navbar";
 import { useUser } from "../custom-hooks/useUser";
 import { sizes, palette } from "../theme";
-import { IFieldList, IFieldListError } from "../interfaces/Field";
+import { IFieldList, IFieldListError } from "../interfaces/IField";
 import Hero from "../components/Hero";
 import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
