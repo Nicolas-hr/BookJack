@@ -6,11 +6,11 @@ import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 import { HamburgerSqueeze } from "react-animated-burgers";
 import { makeStyles } from "@material-ui/core";
-import { useAuth } from "react-use-auth";
 import { sizes, palette } from "../theme";
 import DrawerLink from "./Drawer/DrawerLink";
 import DrawerDelimiter from "./Drawer/DrawerDelimiter";
 import { useUser } from "../custom-hooks/useUser";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 /**
  * Style of the navbar
@@ -59,8 +59,8 @@ const useStyles = makeStyles(() => ({
 
 const Navbar: React.FC = () => {
   const classes = useStyles();
-  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [session, loading] = useSession();
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
             </DrawerLink>
 
             <React.Fragment>
-              <DrawerLink logged={true} href={`/user/${user.sub}`}>
+              <DrawerLink logged={true} href={`/user/`}>
                 Profile
               </DrawerLink>
             </React.Fragment>
@@ -106,7 +106,11 @@ const Navbar: React.FC = () => {
             <DrawerLink
               className={classes.drawerLast}
               logged={true}
-              onClick={() => logout()}
+              onClick={() =>
+                signOut({
+                  callbackUrl: `${window.location.origin}/api/auth/logout`,
+                })
+              }
             >
               Log out
             </DrawerLink>
@@ -119,7 +123,6 @@ const Navbar: React.FC = () => {
 
 export const LambdaNavbar: React.FC = () => {
   const classes = useStyles();
-  const { login, signup } = useAuth();
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = () => {
@@ -138,7 +141,18 @@ export const LambdaNavbar: React.FC = () => {
         </Link>
 
         <div className={classes.inline}>
-          <Button onClick={() => signup()} className={classes.signup}>
+          <Button
+            onClick={() =>
+              signIn(
+                "auth0",
+                { callbackUrl: `${window.location.origin}/check-status` },
+                {
+                  screen_hint: "signup",
+                }
+              )
+            }
+            className={classes.signup}
+          >
             Sign up
           </Button>
         </div>
@@ -166,7 +180,11 @@ export const LambdaNavbar: React.FC = () => {
           <DrawerLink
             className={classes.drawerLast}
             logged={false}
-            onClick={() => login()}
+            onClick={() =>
+              signIn(null, {
+                callbackUrl: `${window.location.origin}/check-status`,
+              })
+            }
           >
             Log in
           </DrawerLink>

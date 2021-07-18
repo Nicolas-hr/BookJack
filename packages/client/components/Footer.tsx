@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
 import { palette } from "../theme";
-import { useAuth } from "react-use-auth";
+import { signIn } from "next-auth/client";
 
 const useStyles = makeStyles({
   root: {
@@ -42,7 +42,6 @@ const useStyles = makeStyles({
 
 const Footer: React.FC = () => {
   const classes = useStyles();
-  const { isAuthenticated, login, signup, user } = useAuth();
 
   return (
     <div className={classes.root}>
@@ -53,17 +52,28 @@ const Footer: React.FC = () => {
       <div className={classes.links}>
         <Link href="/">Home</Link>
 
-        {isAuthenticated() ? (
-          <React.Fragment>
-            <Link href="/browse">Browse</Link>
-            <Link href={`/user/${user.sub}`}>Profile</Link>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <Link onClick={() => login()}>Log in</Link>
-            <Link onClick={() => signup()}>Sign up</Link>
-          </React.Fragment>
-        )}
+        <Link
+          onClick={() =>
+            signIn(null, {
+              callbackUrl: `${window.location.origin}/check-status`,
+            })
+          }
+        >
+          Log in
+        </Link>
+        <Link
+          onClick={() =>
+            signIn(
+              "auth0",
+              { callbackUrl: `${window.location.origin}/check-status` },
+              {
+                screen_hint: "signup",
+              }
+            )
+          }
+        >
+          Sign up
+        </Link>
       </div>
 
       <div className={classes.copyright}>

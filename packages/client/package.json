@@ -15,6 +15,7 @@
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
+    "@next-auth/prisma-adapter": "^0.5.3",
     "@types/react": "^17.0.9",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
@@ -22,10 +23,10 @@
     "auth0-js": "^9.16.2",
     "isomorphic-unfetch": "^3.1.0",
     "next": "10.2.0",
+    "next-auth": "^3.27.3",
     "react": "17.0.2",
     "react-animated-burgers": "^1.2.8",
     "react-dom": "17.0.2",
-    "react-use-auth": "^2.1.0-14",
     "styled-components": "^5.3.0"
   }
 }

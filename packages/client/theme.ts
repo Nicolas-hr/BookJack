@@ -31,6 +31,7 @@ export const sizes = {
   },
   app: {
     padding: "3px 38px",
+    paddingLeft: "38px",
   },
   button: {
     borderRadius: "30px",
@@ -47,6 +48,7 @@ export const palette = {
   darkBlue: "#1A223B",
   textLight: "#C6D0EB",
   textDark: "#1A223B",
+  title: "#205284",
 };
 
 export default theme;

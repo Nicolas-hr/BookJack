@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAuth } from "react-use-auth";
+import { options, signIn, signOut, useSession } from "next-auth/client";
 import { useUser } from "../custom-hooks/useUser";
 
 /**
@@ -7,13 +7,13 @@ import { useUser } from "../custom-hooks/useUser";
  * @returns React element
  */
 const UserStatusCheck = () => {
-  const { user } = useAuth();
   const { userExists } = useUser();
+  const [session, loading] = useSession();
 
   // Check if user exists in our db after fetching auth0's user
   useEffect(() => {
-    if (user) {
-      userExists({ id: user.sub }).then((result) => {
+    if (session) {
+      userExists(session.user.email).then((result) => {
         if (result) {
           window.location.replace("/home");
         } else {
@@ -21,7 +21,7 @@ const UserStatusCheck = () => {
         }
       });
     }
-  }, [user]);
+  }, [session]);
 
   return (
     <React.Fragment>

@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
-import { useAuth } from "react-use-auth";
 import { makeStyles } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { withProtect } from "../hoc/RouteProtection";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 const useStyles = makeStyles((theme) => ({}));
 
 const Home: React.FC = () => {
   const classes = useStyles();
-  const { isAuthenticated, user } = useAuth();
+  const [session] = useSession();
 
   return (
     <React.Fragment>
       <Navbar />
-      Home
+      {session?.user.email}
       <Footer />
     </React.Fragment>
   );
 };
 
-export default Home;
+export default withProtect(Home);
