@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
 import { makeStyles } from "@material-ui/styles";
-import Navbar from "../components/Navbar";
+import { LambdaNavbar } from "../components/Navbar";
 import { useUser } from "../custom-hooks/useUser";
 import { sizes, palette } from "../theme";
 import { IFieldList, IFieldListError } from "../interfaces/IField";
@@ -180,7 +180,7 @@ const Signup = () => {
 
   return (
     <React.Fragment>
-      <Navbar />
+      <LambdaNavbar />
 
       <Hero waves={true}>
         Finish

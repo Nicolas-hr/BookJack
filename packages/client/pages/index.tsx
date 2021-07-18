@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAuth } from "react-use-auth";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
-import Navbar from "../components/Navbar";
+import { LambdaNavbar } from "../components/Navbar";
 import { useUser } from "../custom-hooks/useUser";
 import { sizes, palette } from "../theme";
 import Hero from "../components/Hero";
@@ -75,7 +75,7 @@ const LandingPage = () => {
 
   return (
     <React.Fragment>
-      <Navbar />
+      <LambdaNavbar />
 
       <Hero>
         Have a <br />

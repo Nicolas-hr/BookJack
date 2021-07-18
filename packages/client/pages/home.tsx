@@ -20,4 +20,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default withProtect(Home);
+export default Home;
