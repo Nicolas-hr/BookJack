@@ -1,13 +1,14 @@
 import React from "react";
-import { useAuth } from "react-use-auth";
-import Error from "next/error";
+import { useSession } from "next-auth/client";
+import ErrorPage from "../components/ErrorPage";
 
 export const withProtect = (Component: React.FC) => (props: {}) => {
-  const { isAuthenticated } = useAuth();
+  const [session, loading] = useSession();
 
-  if (!isAuthenticated()) {
-    window.location.replace(window.location.origin);
-    return <Error statusCode={401} title="Not authorized" />;
+  if (loading) return null;
+
+  if (!loading && !session) {
+    return <ErrorPage statusCode={401} title="Not authorized" />;
   }
 
   return <Component {...props} />;

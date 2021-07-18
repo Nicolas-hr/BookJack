@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useAuth } from "react-use-auth";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 import { LambdaNavbar } from "../components/Navbar";

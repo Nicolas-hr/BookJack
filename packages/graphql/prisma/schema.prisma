@@ -7,7 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  userId       String  @id
-  userUsername String? @unique
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

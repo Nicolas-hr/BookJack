@@ -5,18 +5,20 @@ const prisma = new PrismaClient();
 
 export const typeDefs = gql`
   type User {
-    userId: String!
-    userUsername: String
+    id: String!
+    username: String
+    email: String!
+    image: String
   }
 
   extend type Query {
     allUsers: [User!]!
-    searchUserById(id: String!): User
     searchUserByUsername(username: String!): User
+    searchUserByEmail(email: String!): User
   }
 
   extend type Mutation {
-    addUser(id: String!, username: String!): User
+    addUser(email: String!, username: String!): User
   }
 `;
 
@@ -27,7 +29,7 @@ export const resolvers = {
      * @returns List of all the users
      */
     allUsers: () => {
-      return prisma.users.findMany();
+      return prisma.user.findMany();
     },
 
     /**
@@ -35,10 +37,10 @@ export const resolvers = {
      * @param param1 Object destructuring to get the `id` from the `args` argument
      * @returns Found user or null
      */
-    searchUserById: (parent, { id }, ctx, info) => {
-      return prisma.users.findUnique({
+    searchUserByEmail: (parent, { email }, ctx, info) => {
+      return prisma.user.findUnique({
         where: {
-          userId: id,
+          email,
         },
       });
     },
@@ -49,9 +51,9 @@ export const resolvers = {
      * @returns Found user or null
      */
     searchUserByUsername: (parent, { username }, ctx, info) => {
-      return prisma.users.findUnique({
+      return prisma.user.findUnique({
         where: {
-          userUsername: username,
+          username,
         },
       });
     },
@@ -62,13 +64,13 @@ export const resolvers = {
      * @param param1 Object destructuring to get the `id, email, name, and address` from the `args` argument
      * @returns The created user
      */
-    addUser: (parent, { id, username }, ctx, info) => {
-      return prisma.users.upsert({
-        where: { userId: id },
+    addUser: (parent, { email, username }, ctx, info) => {
+      return prisma.user.upsert({
+        where: { email },
         update: {},
         create: {
-          userId: id,
-          userUsername: username,
+          email,
+          username,
         },
       });
     },

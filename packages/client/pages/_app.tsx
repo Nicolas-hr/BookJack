@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { AuthConfig } from "react-use-auth";
-import { Auth0 } from "react-use-auth/auth0";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
 import "../styles/globals.css";
 import theme, { sizes } from "../theme";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { Provider } from "next-auth/client";
 
 // Apollo client to make graphql call programmaticaly
 const apolloClient = new ApolloClient({
@@ -33,26 +32,18 @@ export default function MyApp({ Component, pageProps }) {
   if (!hasMounted) return null;
 
   return (
-    <React.Fragment>
+    <Provider session={pageProps.session}>
       <Head>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <AuthConfig
-        authProvider={Auth0}
-        navigate={(url: string) => router.push(url)}
-        params={{
-          domain: "bookjack.eu.auth0.com",
-          clientID: "AC9rC9cDz7fn4JuKhhfQJQDc9HCrGax6",
-        }}
-      />
       <ThemeProvider theme={theme}>
         <ApolloProvider client={apolloClient}>
           <Component {...pageProps} />
         </ApolloProvider>
       </ThemeProvider>
-    </React.Fragment>
+    </Provider>
   );
 }
