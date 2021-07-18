@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { useRouter } from "next/router";
 import Head from "next/head";
 
 import "../styles/globals.css";
-import theme, { sizes } from "../theme";
+import theme from "../theme";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "next-auth/client";
 
@@ -16,7 +15,6 @@ const apolloClient = new ApolloClient({
 
 export default function MyApp({ Component, pageProps }) {
   const [hasMounted, setHasMounted] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     // Handle server/client side mismatch
