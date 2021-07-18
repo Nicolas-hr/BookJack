@@ -25,6 +25,8 @@ async function main() {
 async function bootstrapClientApp(expressApp) {
   await nextApp.prepare();
   expressApp.get("*", nextApp.getRequestHandler());
+  // Send all the POST call to express instead of being handle by NextJs
+  expressApp.post("*", nextApp.getRequestHandler()); // I'm a fucking genius omg 🎉
 }
 
 /**
