@@ -11,7 +11,6 @@ import { IFieldList, IFieldListError } from "../interfaces/IField";
 import Hero from "../components/Hero";
 import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
-import { asLoggedRequired } from "../hoc/RouteProtection";
 
 const useStyles = makeStyles((theme) => ({
   accent: {
@@ -173,7 +172,7 @@ const Signup = () => {
         id: user.sub,
         username: fields["username"].value,
       });
-      window.location.replace("/");
+      window.location.replace("/home");
     }
 
     return true;
@@ -242,4 +241,4 @@ const Signup = () => {
   );
 };
 
-export default asLoggedRequired(Signup);
+export default Signup;

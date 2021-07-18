@@ -3,19 +3,13 @@ import { useAuth } from "react-use-auth";
 import { makeStyles } from "@material-ui/core";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { asLoggedRequired } from "../hoc/RouteProtection";
+import { withProtect } from "../hoc/RouteProtection";
 
 const useStyles = makeStyles((theme) => ({}));
 
-const Home = () => {
+const Home: React.FC = () => {
   const classes = useStyles();
   const { isAuthenticated, user } = useAuth();
-
-  useEffect(() => {
-    if (!isAuthenticated()) {
-      window.location.replace("/");
-    }
-  }, [user]);
 
   return (
     <React.Fragment>
@@ -26,4 +20,4 @@ const Home = () => {
   );
 };
 
-export default asLoggedRequired(Home);
+export default withProtect(Home);

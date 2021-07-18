@@ -9,7 +9,7 @@ import Hero from "../components/Hero";
 import Feature from "../components/Feature";
 import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
-import { asLambdaRequired } from "../hoc/RouteProtection";
+import { withProtect } from "../hoc/RouteProtection";
 
 const useStyles = makeStyles((theme) => ({
   accent: {
@@ -153,4 +153,4 @@ const LandingPage = () => {
   );
 };
 
-export default asLambdaRequired(LandingPage);
+export default LandingPage;
