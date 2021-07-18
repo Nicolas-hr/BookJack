@@ -15,7 +15,7 @@ import { useUser } from "../custom-hooks/useUser";
 /**
  * Style of the navbar
  */
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   brand: {
     flexGrow: 1,
   },
@@ -59,21 +59,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Navbar: React.FC = () => {
   const classes = useStyles();
-  const { isAuthenticated, user, login, signup, logout } = useAuth();
+  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
-  const { userExists } = useUser();
-  const [exists, setUserExists] = useState<boolean>();
-
-  // Check if user exists in our db
-  useEffect(() => {
-    if (user) {
-      userExists({ id: user.sub }).then((exists) => {
-        setUserExists(exists);
-      });
-    }
-  }, [user]);
-
-  const fullLogged = isAuthenticated() && exists;
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -82,34 +69,20 @@ const Navbar: React.FC = () => {
   return (
     <div>
       <AppBar className={classes.appbar} elevation={0} position="relative">
-        <Toolbar
-          className={`${classes.navbar} ${
-            fullLogged ? classes.login : classes.logout
-          }`}
-        >
+        <Toolbar className={`${classes.navbar} ${classes.login}`}>
           <Link className={classes.brand}>
             <img
               className={classes.logo}
-              src={fullLogged ? "/logo-large.svg" : "/logo-small.svg"}
+              src={"/logo-large.svg"}
               alt="Logo large"
             />
           </Link>
-
-          {!isAuthenticated() && (
-            <div>
-              <div className={classes.inline}>
-                <Button onClick={() => signup()} className={classes.signup}>
-                  Sign up
-                </Button>
-              </div>
-            </div>
-          )}
 
           <HamburgerSqueeze
             isActive={open}
             toggleButton={() => toggleDrawer()}
             buttonWidth={36}
-            barColor={fullLogged ? palette.darkBlue : palette.textLight}
+            barColor={palette.darkBlue}
           />
           <Drawer
             anchor="top"
@@ -118,47 +91,88 @@ const Navbar: React.FC = () => {
             BackdropProps={{ invisible: true }}
           >
             <div className={classes.drawerSpacer}></div>
-            <DrawerLink logged={fullLogged} href="/">
+            <DrawerLink logged={true} href={window.location.origin}>
               Home
             </DrawerLink>
 
-            {isAuthenticated() ? (
-              <React.Fragment>
-                {exists && (
-                  <React.Fragment>
-                    <DrawerLink logged={true} href={`/user/${user.sub}`}>
-                      Profile
-                    </DrawerLink>
-                  </React.Fragment>
-                )}
+            <React.Fragment>
+              <DrawerLink logged={true} href={`/user/${user.sub}`}>
+                Profile
+              </DrawerLink>
+            </React.Fragment>
 
-                <DrawerDelimiter logged={exists}></DrawerDelimiter>
+            <DrawerDelimiter logged={true}></DrawerDelimiter>
 
-                <DrawerLink
-                  className={classes.drawerLast}
-                  logged={exists}
-                  onClick={() => logout()}
-                >
-                  Log out
-                </DrawerLink>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <DrawerDelimiter logged={false}></DrawerDelimiter>
-
-                <DrawerLink
-                  className={classes.drawerLast}
-                  logged={false}
-                  onClick={() => login()}
-                >
-                  Log in
-                </DrawerLink>
-              </React.Fragment>
-            )}
+            <DrawerLink
+              className={classes.drawerLast}
+              logged={true}
+              onClick={() => logout()}
+            >
+              Log out
+            </DrawerLink>
           </Drawer>
         </Toolbar>
       </AppBar>
     </div>
+  );
+};
+
+export const LambdaNavbar: React.FC = () => {
+  const classes = useStyles();
+  const { login, signup } = useAuth();
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <AppBar className={classes.appbar} elevation={0} position="relative">
+      <Toolbar className={`${classes.navbar} ${classes.logout}`}>
+        <Link className={classes.brand}>
+          <img
+            className={classes.logo}
+            src={"/logo-small.svg"}
+            alt="Logo large"
+          />
+        </Link>
+
+        <div className={classes.inline}>
+          <Button onClick={() => signup()} className={classes.signup}>
+            Sign up
+          </Button>
+        </div>
+
+        <HamburgerSqueeze
+          isActive={open}
+          toggleButton={() => toggleDrawer()}
+          buttonWidth={36}
+          barColor={palette.textLight}
+        />
+        <Drawer
+          anchor="top"
+          open={open}
+          onClose={() => toggleDrawer()}
+          BackdropProps={{ invisible: true }}
+        >
+          <div className={classes.drawerSpacer}></div>
+
+          <DrawerLink logged={false} href={window.location.origin}>
+            Home
+          </DrawerLink>
+
+          <DrawerDelimiter logged={false}></DrawerDelimiter>
+
+          <DrawerLink
+            className={classes.drawerLast}
+            logged={false}
+            onClick={() => login()}
+          >
+            Log in
+          </DrawerLink>
+        </Drawer>
+      </Toolbar>
+    </AppBar>
   );
 };
 
