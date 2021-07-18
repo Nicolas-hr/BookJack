@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { makeStyles, StandardProps } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { sizes, palette } from "../theme";
 
 const useStyles = makeStyles((theme) => ({

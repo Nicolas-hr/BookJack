@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { options, signIn, signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import { useUser } from "../custom-hooks/useUser";
 
 /**

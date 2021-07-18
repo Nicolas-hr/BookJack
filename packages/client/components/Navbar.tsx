@@ -9,7 +9,6 @@ import { makeStyles } from "@material-ui/core";
 import { sizes, palette } from "../theme";
 import DrawerLink from "./Drawer/DrawerLink";
 import DrawerDelimiter from "./Drawer/DrawerDelimiter";
-import { useUser } from "../custom-hooks/useUser";
 import { signIn, signOut, useSession } from "next-auth/client";
 
 /**
