@@ -180,7 +180,7 @@ export const LambdaNavbar: React.FC = () => {
             className={classes.drawerLast}
             logged={false}
             onClick={() =>
-              signIn(null, {
+              signIn("auth0", {
                 callbackUrl: `${window.location.origin}/check-status`,
               })
             }
