@@ -30,6 +30,7 @@ yarn install
 👤 **Tanguy Cavagna <tanguy.cvgn@gmail.com>, Nicolas Hoarau <>**
 
 - Github: [@Nicolas-hr](https://github.com/Nicolas-hr)
+- Github: [@TanguyCavagna](https://github.com/TanguyCavagna)
 
 ## 🤝 Contributing
 
@@ -38,6 +39,15 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright &copy; 2021 Nicolas Hoarau & Tanguy Cavagna
+This projects is [MIT](https://github.com/Nicolas-hr/BookJack/blob/main/LICENSE) licensed.
+
+## Contributors ✨
+
+_Implement [All Contributors bot](https://allcontributors.org/docs/en/bot/overview)._
 
 ---
 
