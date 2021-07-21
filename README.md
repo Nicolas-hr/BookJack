@@ -12,7 +12,6 @@
   </a>
 </p>
 
-
 > Bookjack is your personal web-based books library. Enjoy looking at your nice library while sharing your opinions on your reading with the community !
 
 ![](https://i.ibb.co/zmGZLQd/image-2.png)
@@ -47,7 +46,7 @@ This projects is [MIT](https://github.com/Nicolas-hr/BookJack/blob/main/LICENSE)
 
 ## Contributors ✨
 
-_Implement [All Contributors bot](https://allcontributors.org/docs/en/bot/overview)._
+_Implement [All Contributors bot](https://allcontributors.org/docs/en/bot/overview)_
 
 ---
 
