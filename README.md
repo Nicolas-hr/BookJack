@@ -42,6 +42,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright &copy; 2021 Nicolas Hoarau & Tanguy Cavagna
+
 This projects is [MIT](https://github.com/Nicolas-hr/BookJack/blob/main/LICENSE) licensed.
 
 ## Contributors ✨
