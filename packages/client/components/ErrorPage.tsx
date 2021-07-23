@@ -1,5 +1,5 @@
-import React from "react";
 import { useSession } from "next-auth/client";
+import React from "react";
 import Navbar, { LambdaNavbar } from "./Navbar";
 
 const ErrorPage: React.FC<{

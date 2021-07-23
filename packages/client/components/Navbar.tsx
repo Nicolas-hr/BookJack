@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
+import Link from "@material-ui/core/Link";
+import Toolbar from "@material-ui/core/Toolbar";
+import { signIn, signOut } from "next-auth/client";
+import React, { useState } from "react";
 import { HamburgerSqueeze } from "react-animated-burgers";
-import { makeStyles } from "@material-ui/core";
-import { sizes, palette } from "../theme";
-import DrawerLink from "./Drawer/DrawerLink";
+import { palette, sizes } from "../theme";
 import DrawerDelimiter from "./Drawer/DrawerDelimiter";
-import { signIn, signOut, useSession } from "next-auth/client";
+import DrawerLink from "./Drawer/DrawerLink";
 
 /**
  * Style of the navbar
@@ -59,7 +59,6 @@ const useStyles = makeStyles(() => ({
 const Navbar: React.FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [session, loading] = useSession();
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -90,15 +89,16 @@ const Navbar: React.FC = () => {
             BackdropProps={{ invisible: true }}
           >
             <div className={classes.drawerSpacer}></div>
-            <DrawerLink logged={true} href={window.location.origin}>
+
+            <DrawerLink logged={true} href="/home">
               Home
             </DrawerLink>
-
-            <React.Fragment>
-              <DrawerLink logged={true} href={`/user/`}>
-                Profile
-              </DrawerLink>
-            </React.Fragment>
+            <DrawerLink logged={true} href="/browse">
+              Browse
+            </DrawerLink>
+            <DrawerLink logged={true} href="/user/">
+              Profile
+            </DrawerLink>
 
             <DrawerDelimiter logged={true}></DrawerDelimiter>
 

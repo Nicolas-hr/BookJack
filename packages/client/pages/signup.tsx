@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import TextField from "@material-ui/core/TextField";
 import PersonIcon from "@material-ui/icons/Person";
 import { makeStyles } from "@material-ui/styles";
-import { LambdaNavbar } from "../components/Navbar";
-import { sizes, palette } from "../theme";
-import { IFieldList, IFieldListError } from "../interfaces/IField";
-import Hero from "../components/Hero";
-import PrimaryButton from "../components/PrimaryButton";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import { LambdaNavbar } from "../components/Navbar";
+import PrimaryButton from "../components/PrimaryButton";
 import { withProtect } from "../hoc/RouteProtection";
+import { IFieldList, IFieldListError } from "../interfaces/IField";
+import { palette, sizes } from "../theme";
 
 const useStyles = makeStyles((theme) => ({
   accent: {

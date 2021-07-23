@@ -1,8 +1,8 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
-import { palette } from "../theme";
+import { makeStyles } from "@material-ui/core/styles";
 import { signIn } from "next-auth/client";
+import React from "react";
+import { palette } from "../theme";
 
 const useStyles = makeStyles({
   root: {

@@ -1,5 +1,5 @@
-import React from "react";
 import { useSession } from "next-auth/client";
+import React from "react";
 import ErrorPage from "../components/ErrorPage";
 
 export const withProtect = (Component: React.FC) => (props: {}) => {

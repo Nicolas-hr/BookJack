@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import { sizes, palette } from "../../theme";
+import { palette, sizes } from "../../theme";
 
 const useStyles = makeStyles((theme) => ({
   drawerDelimiter: {
