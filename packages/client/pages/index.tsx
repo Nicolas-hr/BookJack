@@ -1,12 +1,12 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
-import { LambdaNavbar } from "../components/Navbar";
-import { sizes, palette } from "../theme";
-import Hero from "../components/Hero";
+import TextField from "@material-ui/core/TextField";
+import React from "react";
 import Feature from "../components/Feature";
-import PrimaryButton from "../components/PrimaryButton";
 import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import { LambdaNavbar } from "../components/Navbar";
+import PrimaryButton from "../components/PrimaryButton";
+import { palette, sizes } from "../theme";
 
 const useStyles = makeStyles((theme) => ({
   accent: {

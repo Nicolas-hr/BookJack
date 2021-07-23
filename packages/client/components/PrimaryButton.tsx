@@ -1,6 +1,6 @@
-import React, { MouseEventHandler } from "react";
-import { makeStyles, StandardProps } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import React, { MouseEventHandler } from "react";
 import { palette, sizes } from "../theme";
 
 const useStyles = makeStyles((theme) => ({

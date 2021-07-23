@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
-import { sizes, palette } from "../../theme";
 import Link from "@material-ui/core/Link";
 import React, { MouseEventHandler } from "react";
+import { palette, sizes } from "../../theme";
 
 const useStyles = makeStyles((theme) => ({
   drawerElement: {

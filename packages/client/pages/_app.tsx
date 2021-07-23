@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import Head from "next/head";
-
-import "../styles/globals.css";
-import theme from "../theme";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { Provider } from "next-auth/client";
+import Head from "next/head";
+import React, { useEffect, useState } from "react";
+import "../styles/globals.css";
+import theme from "../theme";
 
 // Apollo client to make graphql call programmaticaly
 const apolloClient = new ApolloClient({

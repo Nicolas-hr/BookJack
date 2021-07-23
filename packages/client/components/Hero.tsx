@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
 import { makeStyles } from "@material-ui/core";
-import { sizes, palette } from "../theme";
+import React, { ReactNode } from "react";
+import { palette, sizes } from "../theme";
 
 const useStyles = makeStyles((theme) => ({
   hero: {
