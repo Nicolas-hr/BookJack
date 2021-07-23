@@ -1,9 +1,9 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { withProtect } from "../hoc/RouteProtection";
 import { useSession } from "next-auth/client";
+import React from "react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { withProtect } from "../hoc/RouteProtection";
 
 const useStyles = makeStyles((theme) => ({}));
 
