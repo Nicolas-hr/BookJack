@@ -7,6 +7,7 @@ import Collapse from "../components/Collapse";
 import FilterIcon from "../components/FilterIcon";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import useGoogleAPI from "../custom-hooks/useGoogleAPI";
 import { withProtect } from "../hoc/RouteProtection";
 import { palette, sizes } from "../theme";
 
@@ -64,6 +65,7 @@ const Browse: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [bookName, setbookName] = useState<string>();
   const [authorName, setAuthorName] = useState<string>();
+  const { searchBook } = useGoogleAPI();
 
   // Used to perform a call to the GB API after the user stopped typign
   const doneTypingInterval = 100;
@@ -86,41 +88,21 @@ const Browse: React.FC = () => {
   };
 
   /**
-   * Build the Google Books API url
-   * @see https://developers.google.com/books/docs/v1/using#PerformingSearch
-   * @returns Builded URL
-   */
-  const buildURL = (): string => {
-    let URL = "https://www.googleapis.com/books/v1/volumes?q=";
-
-    URL += `+intitle:${bookName}`;
-
-    if (authorName) {
-      URL += `+inauthor:${authorName}`;
-    }
-
-    return URL.replace(" ", "+");
-  };
-
-  /**
-   * Call the Google Books API
-   */
-  const searchBook = (): void => {
-    fetch(buildURL(), {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-  };
-
-  /**
    * Toggle the filter drawer
    */
   const toggleFilter = (): void => {
     setOpen(!open);
+  };
+
+  /**
+   * Use the Google Books API hooks
+   */
+  const performAPICall = () => {
+    clearTimeout(typingTimer);
+
+    typingTimer = setTimeout(() => {
+      searchBook(bookName, authorName).then((res) => console.log(res));
+    }, doneTypingInterval);
   };
 
   return (
@@ -140,8 +122,7 @@ const Browse: React.FC = () => {
             variant="outlined"
             onChange={handleBookChange}
             onKeyUp={() => {
-              clearTimeout(typingTimer);
-              typingTimer = setTimeout(searchBook, doneTypingInterval);
+              performAPICall();
             }}
             onKeyDown={() => {
               clearTimeout(typingTimer);
@@ -174,8 +155,7 @@ const Browse: React.FC = () => {
             className={classes.filterField}
             onChange={handleAuthorChange}
             onKeyUp={() => {
-              clearTimeout(typingTimer);
-              typingTimer = setTimeout(searchBook, doneTypingInterval);
+              performAPICall();
             }}
             onKeyDown={() => {
               clearTimeout(typingTimer);
