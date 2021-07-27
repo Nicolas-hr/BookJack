@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import useGoogleAPI from "../custom-hooks/useGoogleAPI";
 import { withProtect } from "../hoc/RouteProtection";
+import IGoogleBook from "../interfaces/IGoogleBook";
 import { palette, sizes } from "../theme";
 
 const useStyles = makeStyles(() => ({
@@ -61,6 +62,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Browse: React.FC = () => {
+  const [searchResult, setSearchResult] = useState<IGoogleBook[]>();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [bookName, setbookName] = useState<string>();
@@ -100,8 +102,8 @@ const Browse: React.FC = () => {
   const performAPICall = () => {
     clearTimeout(typingTimer);
 
-    typingTimer = setTimeout(() => {
-      searchBook(bookName, authorName).then((res) => console.log(res));
+    typingTimer = setTimeout(async () => {
+      setSearchResult(await searchBook(bookName, authorName));
     }, doneTypingInterval);
   };
 
