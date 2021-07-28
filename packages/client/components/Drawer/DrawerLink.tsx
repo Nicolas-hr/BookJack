@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     padding: sizes.drawer.padding,
     backgroundColor: palette.darkBlue,
     color: palette.textLight,
-    fontSize: "20px",
+    fontSize: "1.25rem",
     fontWeight: 400,
     cursor: "pointer",
 

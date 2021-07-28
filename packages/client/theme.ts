@@ -22,7 +22,7 @@ export const sizes = {
     paddingBottom: "80px",
   },
   navbar: {
-    height: "150px",
+    height: "110px",
     paddingLeft: "38px",
     paddingRight: "38px",
   },
