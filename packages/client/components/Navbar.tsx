@@ -24,6 +24,8 @@ const useStyles = makeStyles(() => ({
     gap: "10px",
   },
   appbar: {
+    top: 0,
+    position: "sticky",
     zIndex: 1301, // Default z-index of Drawer is 1300
   },
   logout: {
@@ -52,7 +54,8 @@ const useStyles = makeStyles(() => ({
     color: palette.white,
     backgroundColor: palette.blue,
     textTransform: "none",
-    height: "25px",
+    height: "30px",
+    fontSize: "1.25rem",
   },
 }));
 
