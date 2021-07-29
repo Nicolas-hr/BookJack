@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: palette.blue,
     textTransform: "none",
     fontWeight: 600,
-    fontSize: "20px",
+    fontSize: "1.25rem",
     boxShadow: sizes.button.boxShadow,
 
     "&:focus": {

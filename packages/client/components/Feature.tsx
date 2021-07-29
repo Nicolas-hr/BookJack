@@ -8,22 +8,25 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
 
     "& h3": {
-      fontSize: "30px",
+      fontSize: "1.875rem",
       width: "100%",
     },
-    "& div": {
-      fontSize: "18px",
+    "& p": {
+      fontSize: "1.125rem",
       width: "100%",
     },
-    "&:nth-child(odd) h3, &:nth-child(odd) div": {
+    "&:nth-child(odd) h3, &:nth-child(odd) p": {
       textAlign: "left",
     },
-    "&:nth-child(even) h3, &:nth-child(even) div": {
+    "&:nth-child(even) h3, &:nth-child(even) p": {
       textAlign: "right",
     },
     "& img": {
       width: "70%",
     },
+  },
+  paragraph: {
+    margin: 0,
   },
 }));
 
@@ -38,7 +41,7 @@ const Feature: React.FC<{
     <div className={classes.feature}>
       <img src={props.illustration} alt="" />
       <h3>{props.title}</h3>
-      {props.children}
+      <p className={classes.paragraph}>{props.children}</p>
     </div>
   );
 };
