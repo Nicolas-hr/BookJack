@@ -11,8 +11,8 @@ const useStyles = makeStyles({
     alignItems: "center",
     backgroundColor: palette.darkBlue,
     padding: "55px 0",
-    height: "600px",
-    gap: "30px",
+    height: "400px",
+    gap: "35px",
 
     "& img": {
       width: "50%",
@@ -28,14 +28,14 @@ const useStyles = makeStyles({
 
     "& a": {
       color: palette.white,
-      fontSize: "20px",
+      fontSize: "1.25rem",
       fontWeight: "600",
       textAlign: "center",
     },
   },
   copyright: {
     textAlign: "center",
-    fontSize: "16px",
+    fontSize: "1rem",
     color: palette.white,
   },
 });
@@ -66,9 +66,7 @@ const Footer: React.FC = () => {
             signIn(
               "auth0",
               { callbackUrl: `${window.location.origin}/check-status` },
-              {
-                screen_hint: "signup",
-              }
+              { screen_hint: "signup" }
             )
           }
         >
