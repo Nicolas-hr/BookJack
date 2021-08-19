@@ -1,8 +1,9 @@
-import { makeStyles } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import React, { useState } from "react";
+import BookBrowseDisplay from "../components/Book/BookBrowseDisplay";
 import Collapse from "../components/Collapse";
 import FilterIcon from "../components/FilterIcon";
 import Footer from "../components/Footer";
@@ -21,13 +22,13 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     color: palette.title,
-    fontSize: "40px",
+    fontSize: "2.5rem",
     margin: 0,
   },
   subtitle: {
     color: palette.darkBlue,
     fontStyle: "italic",
-    fontSize: "20px",
+    fontSize: "1.25rem",
     fontWeight: 500,
     marginBottom: "30px",
   },
@@ -54,7 +55,7 @@ const useStyles = makeStyles(() => ({
   },
   filterTitle: {
     color: palette.title,
-    fontSize: "24px",
+    fontSize: "1.5rem",
   },
   h4: {
     margin: "10px",
@@ -62,7 +63,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Browse: React.FC = () => {
-  const [searchResult, setSearchResult] = useState<IGoogleBook[]>();
+  const [searchResult, setSearchResult] = useState<IGoogleBook[]>([]);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [bookName, setbookName] = useState<string>();
@@ -104,6 +105,7 @@ const Browse: React.FC = () => {
 
     typingTimer = setTimeout(async () => {
       setSearchResult(await searchBook(bookName, authorName));
+      console.log(searchResult);
     }, doneTypingInterval);
   };
 
@@ -169,7 +171,7 @@ const Browse: React.FC = () => {
           />
         </Collapse>
       </header>
-
+      <BookBrowseDisplay books={searchResult} />
       <Footer />
     </React.Fragment>
   );

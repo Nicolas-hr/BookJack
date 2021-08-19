@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "20px",
     paddingBottom: "50px",
     backgroundColor: palette.darkBlue,
-    fontSize: "48px",
+    fontSize: "3rem",
     fontWeight: 700,
     color: "#fff",
 
