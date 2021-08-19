@@ -21,13 +21,13 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: sizes.app.paddingLeft,
     marginBottom: 0,
     marginTop: "65px",
-    fontSize: "30px",
+    fontSize: "1.875rem",
 
     "& + small": {
       color: palette.darkBlue,
       width: "100%",
       fontStyle: "italic",
-      fontSize: "25px",
+      fontSize: "1.563rem",
       paddingLeft: sizes.app.paddingLeft,
     },
   },

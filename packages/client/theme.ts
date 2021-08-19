@@ -40,6 +40,9 @@ export const sizes = {
   input: {
     borderRadius: "14px",
   },
+  cover: {
+    borderRadius: "14px",
+  },
 };
 
 export const palette = {
@@ -49,6 +52,7 @@ export const palette = {
   textLight: "#C6D0EB",
   textDark: "#1A223B",
   title: "#205284",
+  inputStrokeDark: "#434D6A",
 };
 
 export default theme;
