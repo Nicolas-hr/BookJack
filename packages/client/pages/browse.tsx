@@ -70,7 +70,7 @@ const Browse: React.FC = () => {
   const [authorName, setAuthorName] = useState<string>();
   const { searchBook } = useGoogleAPI();
 
-  // Used to perform a call to the GB API after the user stopped typign
+  // Used to perform a call to the GB API after the user stopped typing
   const doneTypingInterval = 100;
   let typingTimer: NodeJS.Timeout;
 
