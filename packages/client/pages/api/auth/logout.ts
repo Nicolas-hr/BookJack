@@ -6,7 +6,7 @@
  * @param res Response
  */
 export default function handler(req, res) {
-  const returnTo = encodeURI("http://localhost:3000");
+  const returnTo = encodeURI(window.location.origin);
   res.redirect(
     `https://${process.env.AUTH0_DOMAIN}/v2/logout?client_id=${process.env.AUTH0_CLIENT_ID}&returnTo=${returnTo}&federated`
   );
